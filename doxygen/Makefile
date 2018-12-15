@@ -5,13 +5,25 @@ MANDIR ?= $(PREFIX)/share/man
 DOXYGEN := $(shell command -v doxygen 2> /dev/null)
 DOXYGENFLAGS =
 
-.PHONY: all
-all:
+all: Doxyfile
 ifndef DOXYGEN
 	$(warning "doxygen is not available please install it")
 else
 	$(DOXYGEN) $(DOXYGENFLAGS)
 endif
+
+Doxyfile: Doxyfile.in
+	@sed \
+	  -e 's%@MAINPAGE_H@%./mainpage.h%' \
+	  -e 's%@SRCDIR@%../src%' \
+	  -e 's%@INCLUDEDIR@%../include/tinyalsa%' \
+	  -e 's%@EXAMPLE_DIR@%../examples%' \
+	  -e 's%@HTML_OUTPUT_DIR@%html%' \
+	  -e 's%@MAN_OUTPUT_DIR@%man%' \
+	  -e 's%@MAN_OUTPUT_SUBDIR@%%' \
+	  -e 's%@GENERATE_HTML@%YES%' \
+	  -e 's%@GENERATE_MAN@%YES%' \
+	  $^ > $@
 
 .PHONY: clean
 clean:
