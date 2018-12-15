@@ -12,7 +12,7 @@ tinyalsa_dep = declare_dependency(link_with: tinyalsa,
   include_directories: include_directories('include'))
 
 if not get_option('docs').disabled()
-  # subdir('docs') # FIXME
+  subdir('doxygen')
 endif
 
 if not get_option('examples').disabled()

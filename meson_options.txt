@@ -1,5 +1,9 @@
 option('docs', type: 'feature', value: 'auto', yield: true,
   description : 'Generate documentation with Doxygen')
+option('docs-html', type: 'feature', value: 'auto',
+  description : 'Build HTML if documentation with Doxygen is built')
+option('docs-man', type: 'feature', value: 'auto',
+  description : 'Build man pages if documentation with Doxygen is built')
 option('examples', type: 'feature', value: 'auto', yield: true,
   description : 'Build examples')
 option('utils', type: 'feature', value: 'auto', yield: true,
